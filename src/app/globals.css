@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --color-culbra-green: #1db980;
+  --color-culbra-red: #e8482c;
+  --color-culbra-orange: #e08a1e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-culbra-green: var(--color-culbra-green);
+  --color-culbra-red: var(--color-culbra-red);
+  --color-culbra-orange: var(--color-culbra-orange);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@keyframes fade-up-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up-in 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-scale {
+  animation: fade-scale-in 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-scale {
+    animation: none;
+  }
+}
+
+/* While the hero's scroll-hijack is active, hide the native scrollbar so it
+   can't be dragged to bypass the slide navigation (the page itself is still
+   technically scrollable so that keyboard Tab focus can scroll off-screen
+   elements into view — this only removes the visible, draggable handle). */
+html.scroll-locked {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html.scroll-locked::-webkit-scrollbar {
+  display: none;
+}
