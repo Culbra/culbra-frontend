@@ -16,7 +16,7 @@ export default function FeatureRow({
 }) {
   return (
     <div
-      className="relative bg-cover bg-center"
+      className="relative flex-none bg-cover bg-center"
       style={{ backgroundImage: "url(/images/tribal-pattern.jpg)" }}
     >
       <div className="absolute inset-0 bg-black/92" />
@@ -24,13 +24,13 @@ export default function FeatureRow({
         {FEATURES.map(({ label, Icon }) => (
           <li
             key={label}
-            className="flex flex-col items-center gap-1 px-1 py-4 text-center sm:gap-2 sm:px-4 sm:py-8"
+            className="flex flex-col items-center gap-0.5 px-1 py-1 text-center sm:gap-2 sm:px-4 sm:py-8"
           >
             <Icon
-              className={`h-6 w-6 sm:h-10 sm:w-10 ${accent === "all" || label === accent ? "text-culbra-green" : "text-white"}`}
+              className={`h-4 w-4 sm:h-10 sm:w-10 ${accent === "all" || label === accent ? "text-culbra-green" : "text-white"}`}
               strokeWidth={1.5}
             />
-            <span className="text-[11px] font-medium text-white sm:text-sm">
+            <span className="text-[10px] font-medium text-white sm:text-sm">
               {label}
             </span>
           </li>

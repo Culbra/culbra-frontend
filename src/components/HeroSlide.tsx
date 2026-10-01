@@ -12,13 +12,17 @@ export type HeroSlideContent = {
   imageObjectPosition?: string;
   imageFit?: "cover" | "contain";
   imageWrapperClassName?: string;
+  imageMobileWidthClassName?: string;
   imageMaxHeightClassName?: string;
   headingSizeClassName?: string;
   bodySizeClassName?: string;
   textColumnWidthClassName?: string;
   imageMobileHeightClassName?: string;
   imageScaleClassName?: string;
+  imageMobileBottomFade?: boolean;
+  imageWrapperMaskClassName?: string;
   showEdgeFade?: boolean;
+  edgeFadeBackgroundImage?: string;
   subline?: ReactNode;
   ctaLabel?: string;
   ctaHref?: string;
@@ -34,39 +38,43 @@ export default function HeroSlide({
   imageObjectPosition = "object-top",
   imageFit = "cover",
   imageWrapperClassName = "",
+  imageMobileWidthClassName = "w-full",
   imageMaxHeightClassName = "min-[1024px]:max-h-[640px] min-[1280px]:max-h-[760px]",
-  headingSizeClassName = "text-4xl sm:text-5xl lg:text-6xl xl:text-8xl",
+  headingSizeClassName = "text-[clamp(1.375rem,6dvh,2rem)] sm:text-5xl lg:text-6xl xl:text-8xl",
   bodySizeClassName = "max-w-md text-sm sm:text-base lg:max-w-lg lg:text-lg xl:max-w-xl xl:text-xl",
   textColumnWidthClassName = "md:w-[min(36vw,300px)] lg:w-[min(46vw,36rem)] xl:w-[min(48vw,42rem)]",
-  imageMobileHeightClassName = "h-[420px]",
+  imageMobileHeightClassName = "h-[43dvh] min-h-[230px]",
   imageScaleClassName = "",
+  imageMobileBottomFade = false,
+  imageWrapperMaskClassName = "",
   showEdgeFade = true,
+  edgeFadeBackgroundImage = "linear-gradient(to top, black, transparent 14%, transparent 86%, black), linear-gradient(to right, black, transparent 10%, transparent 90%, black)",
   subline,
   ctaLabel,
   ctaHref = "#",
   onCtaClick,
 }: Omit<HeroSlideContent, "id">) {
   return (
-    <div className="relative flex w-full flex-1 flex-col-reverse items-stretch gap-0 pt-28 md:flex-row md:gap-4 md:px-16">
+    <div className="relative flex min-h-0 w-full flex-1 flex-col-reverse items-stretch gap-0 pt-8 md:flex-row md:gap-4 md:px-16 md:pt-28">
       <div
-        className={`relative z-10 -mt-16 flex flex-col items-start justify-center px-6 pb-10 text-left md:mt-0 md:shrink-0 md:px-0 md:py-0 ${textColumnWidthClassName}`}
+        className={`relative z-10 flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden px-6 text-left md:mt-0 md:flex-none md:shrink-0 md:justify-center md:overflow-visible md:px-0 md:py-0 ${textColumnWidthClassName}`}
       >
         <h1
-          className={`animate-fade-up font-extrabold uppercase leading-[1.05] tracking-tight text-white ${headingSizeClassName}`}
+          className={`animate-fade-up font-extrabold uppercase leading-[1.08] tracking-normal sm:tracking-tight text-white ${headingSizeClassName}`}
           style={{ animationDelay: "150ms" }}
         >
           {heading}
         </h1>
 
         <p
-          className={`animate-fade-up mt-6 leading-relaxed text-white/80 ${bodySizeClassName}`}
+          className={`animate-fade-up mt-5 leading-snug sm:mt-6 sm:leading-relaxed text-white/80 ${bodySizeClassName}`}
           style={{ animationDelay: "500ms" }}
         >
           {body}
         </p>
 
         <p
-          className="animate-fade-up mt-8 flex items-center gap-2 text-base font-semibold text-culbra-green sm:text-lg xl:text-2xl"
+          className="animate-fade-up mt-4 flex items-center gap-2 text-sm font-semibold text-culbra-green sm:mt-8 sm:text-lg xl:text-2xl"
           style={{ animationDelay: "850ms" }}
         >
           {tagline}
@@ -74,7 +82,7 @@ export default function HeroSlide({
 
         {subline && (
           <p
-            className="animate-fade-up mt-4 text-lg font-bold text-white sm:text-xl xl:text-2xl"
+            className="animate-fade-up mt-3 text-base font-bold text-white sm:mt-4 sm:text-xl xl:text-2xl"
             style={{ animationDelay: "1000ms" }}
           >
             {subline}
@@ -86,7 +94,7 @@ export default function HeroSlide({
             <button
               type="button"
               onClick={onCtaClick}
-              className="animate-fade-up group mt-8 inline-flex items-center gap-3 rounded-full border border-culbra-green px-6 py-3 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-culbra-green hover:text-black sm:text-base"
+              className="animate-fade-up group mt-3 inline-flex items-center gap-3 rounded-full border border-culbra-green px-5 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-culbra-green hover:text-black sm:mt-8 sm:px-6 sm:py-3 sm:text-base"
               style={{ animationDelay: "1150ms" }}
             >
               {ctaLabel}
@@ -95,7 +103,7 @@ export default function HeroSlide({
           ) : (
             <a
               href={ctaHref}
-              className="animate-fade-up group mt-8 inline-flex items-center gap-3 rounded-full border border-culbra-green px-6 py-3 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-culbra-green hover:text-black sm:text-base"
+              className="animate-fade-up group mt-3 inline-flex items-center gap-3 rounded-full border border-culbra-green px-5 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-culbra-green hover:text-black sm:mt-8 sm:px-6 sm:py-3 sm:text-base"
               style={{ animationDelay: "1150ms" }}
             >
               {ctaLabel}
@@ -105,14 +113,14 @@ export default function HeroSlide({
       </div>
 
       <div
-        className={`relative w-full min-w-0 flex-none overflow-hidden min-[768px]:mt-32 min-[768px]:h-auto min-[768px]:max-h-[420px] md:flex-1 min-[800px]:mt-64 min-[1024px]:mt-0 xl:mr-24 ${imageMobileHeightClassName} ${imageMaxHeightClassName} ${imageWrapperClassName}`}
+        className={`relative min-w-0 flex-none overflow-hidden min-[768px]:mt-32 min-[768px]:h-auto min-[768px]:w-full min-[768px]:max-h-[420px] md:flex-1 min-[800px]:mt-64 min-[1024px]:mt-0 xl:mr-24 ${imageMobileWidthClassName} ${imageMobileHeightClassName} ${imageMaxHeightClassName} ${imageWrapperClassName} ${imageWrapperMaskClassName}`}
       >
         <Image
           src={imageSrc}
           alt={imageAlt}
           fill
           priority
-          className={`animate-fade-scale ${imageFit === "contain" ? "object-contain" : "object-cover"} ${imageObjectPosition} ${imageScaleClassName}`}
+          className={`animate-fade-scale ${imageFit === "contain" ? "object-contain" : "object-cover"} ${imageObjectPosition} ${imageScaleClassName} ${imageMobileBottomFade ? "max-md:[mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)]" : ""}`}
           style={{ animationDelay: "250ms" }}
         />
         {showEdgeFade && (
@@ -120,8 +128,7 @@ export default function HeroSlide({
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 lg:hidden"
             style={{
-              backgroundImage:
-                "linear-gradient(to top, black, transparent 14%, transparent 86%, black), linear-gradient(to right, black, transparent 10%, transparent 90%, black)",
+              backgroundImage: edgeFadeBackgroundImage,
             }}
           />
         )}

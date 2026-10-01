@@ -16,13 +16,17 @@ const SLIDES: Array<{
   imageObjectPosition?: string;
   imageFit?: "cover" | "contain";
   imageWrapperClassName?: string;
+  imageMobileWidthClassName?: string;
   imageMaxHeightClassName?: string;
   headingSizeClassName?: string;
   bodySizeClassName?: string;
   textColumnWidthClassName?: string;
   imageMobileHeightClassName?: string;
   imageScaleClassName?: string;
+  imageMobileBottomFade?: boolean;
+  imageWrapperMaskClassName?: string;
   showEdgeFade?: boolean;
+  edgeFadeBackgroundImage?: string;
   subline?: React.ReactNode;
   ctaLabel?: string;
   ctaHref?: string;
@@ -51,6 +55,9 @@ const SLIDES: Array<{
     imageAlt:
       "Portrait of a woman wearing traditional African headwrap and jewelry",
     imageObjectPosition: "object-top",
+    imageFit: "contain",
+    imageMobileWidthClassName: "w-full max-md:mt-6",
+    imageMobileBottomFade: true,
   },
   {
     id: "think",
@@ -110,7 +117,7 @@ const SLIDES: Array<{
     imageWrapperClassName: "lg:self-center",
     imageMaxHeightClassName:
       "min-[1024px]:h-[62vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74vh]",
-    headingSizeClassName: "text-4xl sm:text-5xl lg:text-5xl xl:text-7xl",
+    headingSizeClassName: "text-[clamp(1.375rem,6dvh,2rem)] sm:text-5xl lg:text-5xl xl:text-7xl",
     bodySizeClassName:
       "max-w-md text-sm sm:text-base lg:max-w-xl lg:text-lg xl:max-w-2xl xl:text-xl",
     textColumnWidthClassName:
@@ -145,7 +152,7 @@ const SLIDES: Array<{
     imageWrapperClassName: "lg:self-center",
     imageMaxHeightClassName:
       "min-[1024px]:h-[62vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[75vh]",
-    headingSizeClassName: "text-4xl sm:text-5xl lg:text-5xl xl:text-7xl",
+    headingSizeClassName: "text-[clamp(1.375rem,6dvh,2rem)] sm:text-5xl lg:text-5xl xl:text-7xl",
     bodySizeClassName:
       "max-w-md text-xs sm:text-sm md:text-base lg:max-w-lg lg:text-lg xl:max-w-xl xl:text-lg",
     textColumnWidthClassName:
@@ -177,9 +184,11 @@ const SLIDES: Array<{
     imageWrapperClassName: "lg:self-center",
     imageMaxHeightClassName:
       "min-[1024px]:h-[68vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74.5vh]",
-    headingSizeClassName: "text-5xl sm:text-6xl lg:text-6xl xl:text-8xl",
-    imageMobileHeightClassName: "h-[300px]",
+    headingSizeClassName: "text-[clamp(1.5rem,7dvh,2.25rem)] sm:text-6xl lg:text-6xl xl:text-8xl",
+    imageMobileHeightClassName: "h-[36dvh] min-h-[200px]",
     imageScaleClassName: "scale-[1.3] md:scale-100",
+    imageWrapperMaskClassName:
+      "max-md:[mask-image:linear-gradient(to_bottom,black_65%,transparent_92%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_65%,transparent_92%)]",
     showEdgeFade: false,
   },
 ];
@@ -376,7 +385,7 @@ export default function HeroCarousel() {
   const slide = SLIDES[active];
 
   return (
-    <section className="relative flex min-h-screen flex-col overflow-hidden bg-black">
+    <section className="relative flex h-dvh flex-col overflow-hidden bg-black md:h-auto md:min-h-screen">
       <Navbar />
 
       <HeroSlide
@@ -389,6 +398,7 @@ export default function HeroCarousel() {
         imageObjectPosition={slide.imageObjectPosition}
         imageFit={slide.imageFit}
         imageWrapperClassName={slide.imageWrapperClassName}
+        imageMobileWidthClassName={slide.imageMobileWidthClassName}
         imageMaxHeightClassName={slide.imageMaxHeightClassName}
         headingSizeClassName={slide.headingSizeClassName}
         bodySizeClassName={slide.bodySizeClassName}
@@ -396,6 +406,9 @@ export default function HeroCarousel() {
         imageMobileHeightClassName={slide.imageMobileHeightClassName}
         imageScaleClassName={slide.imageScaleClassName}
         showEdgeFade={slide.showEdgeFade}
+        edgeFadeBackgroundImage={slide.edgeFadeBackgroundImage}
+        imageWrapperMaskClassName={slide.imageWrapperMaskClassName}
+        imageMobileBottomFade={slide.imageMobileBottomFade}
         subline={slide.subline}
         ctaLabel={slide.ctaLabel}
         ctaHref={slide.ctaHref}
