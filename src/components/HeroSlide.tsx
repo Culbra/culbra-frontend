@@ -11,7 +11,10 @@ export type HeroSlideContent = {
   imageAlt: string;
   imageObjectPosition?: string;
   imageFit?: "cover" | "contain";
+  imageDesktopFit?: "cover" | "contain";
+  imageDesktopFitBreakpoint?: "lg" | "xl";
   imageWrapperClassName?: string;
+  imageMarginClassName?: string;
   imageMobileWidthClassName?: string;
   imageMaxHeightClassName?: string;
   headingSizeClassName?: string;
@@ -37,12 +40,15 @@ export default function HeroSlide({
   imageAlt,
   imageObjectPosition = "object-top",
   imageFit = "cover",
+  imageDesktopFit,
+  imageDesktopFitBreakpoint = "lg",
   imageWrapperClassName = "",
+  imageMarginClassName = "xl:mr-24",
   imageMobileWidthClassName = "w-full",
   imageMaxHeightClassName = "min-[1024px]:max-h-[640px] min-[1280px]:max-h-[760px]",
   headingSizeClassName = "text-[clamp(1.375rem,6dvh,2rem)] sm:text-5xl lg:text-6xl xl:text-8xl",
   bodySizeClassName = "max-w-md text-sm sm:text-base lg:max-w-lg lg:text-lg xl:max-w-xl xl:text-xl",
-  textColumnWidthClassName = "md:w-[min(36vw,300px)] lg:w-[min(46vw,36rem)] xl:w-[min(48vw,42rem)]",
+  textColumnWidthClassName = "lg:w-[min(46vw,36rem)] xl:w-[min(48vw,42rem)]",
   imageMobileHeightClassName = "h-[43dvh] min-h-[230px]",
   imageScaleClassName = "",
   imageMobileBottomFade = false,
@@ -55,9 +61,9 @@ export default function HeroSlide({
   onCtaClick,
 }: Omit<HeroSlideContent, "id">) {
   return (
-    <div className="relative flex min-h-0 w-full flex-1 flex-col-reverse items-stretch gap-0 pt-8 md:flex-row md:gap-4 md:px-16 md:pt-28">
+    <div className="relative flex min-h-0 w-full flex-1 flex-col-reverse items-stretch gap-0 pt-8 sm:pt-10 lg:flex-row lg:gap-4 lg:px-16 lg:pt-28">
       <div
-        className={`relative z-10 flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden px-6 text-left md:mt-0 md:flex-none md:shrink-0 md:justify-center md:overflow-visible md:px-0 md:py-0 ${textColumnWidthClassName}`}
+        className={`relative z-10 flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden px-6 text-left sm:px-10 lg:mt-0 lg:flex-none lg:shrink-0 lg:justify-center lg:overflow-visible lg:px-0 lg:py-0 ${textColumnWidthClassName}`}
       >
         <h1
           className={`animate-fade-up font-extrabold uppercase leading-[1.08] tracking-normal sm:tracking-tight text-white ${headingSizeClassName}`}
@@ -113,14 +119,24 @@ export default function HeroSlide({
       </div>
 
       <div
-        className={`relative min-w-0 flex-none overflow-hidden min-[768px]:mt-32 min-[768px]:h-auto min-[768px]:w-full min-[768px]:max-h-[420px] md:flex-1 min-[800px]:mt-64 min-[1024px]:mt-0 xl:mr-24 ${imageMobileWidthClassName} ${imageMobileHeightClassName} ${imageMaxHeightClassName} ${imageWrapperClassName} ${imageWrapperMaskClassName}`}
+        className={`relative min-w-0 flex-none overflow-hidden lg:flex-1 lg:mt-0 ${imageMarginClassName} ${imageMobileWidthClassName} ${imageMobileHeightClassName} ${imageMaxHeightClassName} ${imageWrapperClassName} ${imageWrapperMaskClassName}`}
       >
         <Image
           src={imageSrc}
           alt={imageAlt}
           fill
           priority
-          className={`animate-fade-scale ${imageFit === "contain" ? "object-contain" : "object-cover"} ${imageObjectPosition} ${imageScaleClassName} ${imageMobileBottomFade ? "max-md:[mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)]" : ""}`}
+          className={`animate-fade-scale ${imageFit === "contain" ? "object-contain" : "object-cover"} ${
+            imageDesktopFit === "contain"
+              ? imageDesktopFitBreakpoint === "xl"
+                ? "xl:object-contain"
+                : "lg:object-contain"
+              : imageDesktopFit === "cover"
+                ? imageDesktopFitBreakpoint === "xl"
+                  ? "xl:object-cover"
+                  : "lg:object-cover"
+                : ""
+          } ${imageObjectPosition} ${imageScaleClassName} ${imageMobileBottomFade ? "max-md:[mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)]" : ""}`}
           style={{ animationDelay: "250ms" }}
         />
         {showEdgeFade && (

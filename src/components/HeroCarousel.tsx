@@ -15,7 +15,10 @@ const SLIDES: Array<{
   imageAlt: string;
   imageObjectPosition?: string;
   imageFit?: "cover" | "contain";
+  imageDesktopFit?: "cover" | "contain";
+  imageDesktopFitBreakpoint?: "lg" | "xl";
   imageWrapperClassName?: string;
+  imageMarginClassName?: string;
   imageMobileWidthClassName?: string;
   imageMaxHeightClassName?: string;
   headingSizeClassName?: string;
@@ -56,6 +59,7 @@ const SLIDES: Array<{
       "Portrait of a woman wearing traditional African headwrap and jewelry",
     imageObjectPosition: "object-top",
     imageFit: "contain",
+    imageDesktopFit: "cover",
     imageMobileWidthClassName: "w-full max-md:mt-6",
     imageMobileBottomFade: true,
   },
@@ -121,7 +125,7 @@ const SLIDES: Array<{
     bodySizeClassName:
       "max-w-md text-sm sm:text-base lg:max-w-xl lg:text-lg xl:max-w-2xl xl:text-xl",
     textColumnWidthClassName:
-      "md:w-[min(40vw,340px)] lg:w-[min(54vw,42rem)] xl:w-[min(56vw,48rem)]",
+      "lg:w-[min(54vw,42rem)] xl:w-[min(56vw,48rem)]",
   },
   {
     id: "move",
@@ -156,7 +160,7 @@ const SLIDES: Array<{
     bodySizeClassName:
       "max-w-md text-xs sm:text-sm md:text-base lg:max-w-lg lg:text-lg xl:max-w-xl xl:text-lg",
     textColumnWidthClassName:
-      "md:w-[min(52vw,480px)] lg:w-[min(46vw,36rem)] xl:w-[min(48vw,42rem)]",
+      "lg:w-[min(46vw,36rem)] xl:w-[min(48vw,42rem)]",
   },
   {
     id: "culbra",
@@ -181,12 +185,16 @@ const SLIDES: Array<{
       "Group of four people wearing black and tribal-print streetwear with Culbra branding",
     imageObjectPosition: "object-bottom",
     imageFit: "contain",
+    imageDesktopFit: "cover",
+    imageDesktopFitBreakpoint: "xl",
     imageWrapperClassName: "lg:self-center",
+    imageMarginClassName: "xl:mr-0",
     imageMaxHeightClassName:
       "min-[1024px]:h-[68vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74.5vh]",
-    headingSizeClassName: "text-[clamp(1.5rem,7dvh,2.25rem)] sm:text-6xl lg:text-6xl xl:text-8xl",
+    headingSizeClassName:
+      "text-[clamp(1.5rem,7dvh,2.25rem)] sm:text-6xl lg:text-6xl xl:text-7xl md:whitespace-nowrap",
     imageMobileHeightClassName: "h-[36dvh] min-h-[200px]",
-    imageScaleClassName: "scale-[1.3] md:scale-100",
+    imageScaleClassName: "scale-[1.3] lg:scale-100",
     imageWrapperMaskClassName:
       "max-md:[mask-image:linear-gradient(to_bottom,black_65%,transparent_92%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_65%,transparent_92%)]",
     showEdgeFade: false,
@@ -216,9 +224,33 @@ function smoothScrollTo(targetY: number, duration: number) {
   requestAnimationFrame(step);
 }
 
+// The locked, full-viewport scroll-hijack carousel is a deliberately
+// phone-sized experience. At tablet width and up there's enough room (and
+// the brief explicitly requires) a normal scrollable page instead of
+// forcing all hero content into exactly one screen's height.
+const MOBILE_LOCK_BREAKPOINT = 768;
+
+function getIsMobileViewport() {
+  if (typeof window === "undefined") return true;
+  return window.innerWidth < MOBILE_LOCK_BREAKPOINT;
+}
+
 export default function HeroCarousel() {
   const [active, setActive] = useState(0);
-  const [locked, setLocked] = useState(true);
+  const [locked, setLocked] = useState(getIsMobileViewport);
+
+  // Re-check on mount (in case the server-rendered guess was wrong) and on
+  // resize/orientation change; crossing into tablet+ width always forces
+  // an unlock so the page never gets stuck fighting natural scroll.
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${MOBILE_LOCK_BREAKPOINT - 1}px)`);
+    const onChange = () => {
+      if (!mql.matches) setLocked(false);
+    };
+    onChange();
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
 
   const activeRef = useRef(active);
   activeRef.current = active;
@@ -397,7 +429,10 @@ export default function HeroCarousel() {
         imageAlt={slide.imageAlt}
         imageObjectPosition={slide.imageObjectPosition}
         imageFit={slide.imageFit}
+        imageDesktopFit={slide.imageDesktopFit}
+        imageDesktopFitBreakpoint={slide.imageDesktopFitBreakpoint}
         imageWrapperClassName={slide.imageWrapperClassName}
+        imageMarginClassName={slide.imageMarginClassName}
         imageMobileWidthClassName={slide.imageMobileWidthClassName}
         imageMaxHeightClassName={slide.imageMaxHeightClassName}
         headingSizeClassName={slide.headingSizeClassName}

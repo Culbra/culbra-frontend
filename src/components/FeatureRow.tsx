@@ -27,7 +27,7 @@ export default function FeatureRow({
             className="flex flex-col items-center gap-0.5 px-1 py-1 text-center sm:gap-2 sm:px-4 sm:py-8"
           >
             <Icon
-              className={`h-4 w-4 sm:h-10 sm:w-10 ${accent === "all" || label === accent ? "text-culbra-green" : "text-white"}`}
+              className={`h-4 w-4 sm:h-10 sm:w-10 ${label === accent ? "text-culbra-green" : "text-white"}`}
               strokeWidth={1.5}
             />
             <span className="text-[10px] font-medium text-white sm:text-sm">
