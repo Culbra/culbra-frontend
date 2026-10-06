@@ -54,12 +54,15 @@ const SLIDES: Array<{
       </>
     ),
     tagline: <>Bring what makes you, you, with you.</>,
-    imageSrc: "/images/hero-portrait-nobg.png",
+    imageSrc: "/images/hero-portrait-headwrap.jpg",
     imageAlt:
-      "Portrait of a woman wearing traditional African headwrap and jewelry",
+      "Side profile of a woman wearing a colorful tribal-print headwrap and gold jewelry",
     imageObjectPosition: "object-top",
     imageFit: "contain",
-    imageDesktopFit: "cover",
+    imageDesktopFit: "contain",
+    imageWrapperClassName: "lg:self-center",
+    imageMaxHeightClassName:
+      "min-[1024px]:h-[62vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74vh]",
     imageMobileWidthClassName: "w-full max-md:mt-6",
     imageMobileBottomFade: true,
   },
@@ -180,10 +183,10 @@ const SLIDES: Array<{
     subline: <>Are you ready to enter the arena?</>,
     ctaLabel: "Explore Culbra",
     ctaHref: "#programs",
-    imageSrc: "/images/hero-group-v2.jpg",
+    imageSrc: "/images/hero-group-v3.jpg",
     imageAlt:
       "Group of four people wearing black and tribal-print streetwear with Culbra branding",
-    imageObjectPosition: "object-bottom",
+    imageObjectPosition: "object-top",
     imageFit: "contain",
     imageDesktopFit: "cover",
     imageDesktopFitBreakpoint: "xl",
@@ -193,10 +196,10 @@ const SLIDES: Array<{
       "min-[1024px]:h-[68vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74.5vh]",
     headingSizeClassName:
       "text-[clamp(1.5rem,7dvh,2.25rem)] sm:text-6xl lg:text-6xl xl:text-7xl md:whitespace-nowrap",
-    imageMobileHeightClassName: "h-[36dvh] min-h-[200px]",
-    imageScaleClassName: "scale-[1.3] lg:scale-100",
+    imageMobileHeightClassName: "h-[40dvh] min-h-[220px]",
+    imageScaleClassName: "",
     imageWrapperMaskClassName:
-      "max-md:[mask-image:linear-gradient(to_bottom,black_65%,transparent_92%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_65%,transparent_92%)]",
+      "max-md:[mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]",
     showEdgeFade: false,
   },
 ];
@@ -224,33 +227,11 @@ function smoothScrollTo(targetY: number, duration: number) {
   requestAnimationFrame(step);
 }
 
-// The locked, full-viewport scroll-hijack carousel is a deliberately
-// phone-sized experience. At tablet width and up there's enough room (and
-// the brief explicitly requires) a normal scrollable page instead of
-// forcing all hero content into exactly one screen's height.
-const MOBILE_LOCK_BREAKPOINT = 768;
-
-function getIsMobileViewport() {
-  if (typeof window === "undefined") return true;
-  return window.innerWidth < MOBILE_LOCK_BREAKPOINT;
-}
-
 export default function HeroCarousel() {
   const [active, setActive] = useState(0);
-  const [locked, setLocked] = useState(getIsMobileViewport);
-
-  // Re-check on mount (in case the server-rendered guess was wrong) and on
-  // resize/orientation change; crossing into tablet+ width always forces
-  // an unlock so the page never gets stuck fighting natural scroll.
-  useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${MOBILE_LOCK_BREAKPOINT - 1}px)`);
-    const onChange = () => {
-      if (!mql.matches) setLocked(false);
-    };
-    onChange();
-    mql.addEventListener("change", onChange);
-    return () => mql.removeEventListener("change", onChange);
-  }, []);
+  // The hero is locked on every screen size until the user clicks
+  // "Explore Culbra" on the last slide.
+  const [locked, setLocked] = useState(true);
 
   const activeRef = useRef(active);
   activeRef.current = active;
@@ -403,7 +384,13 @@ export default function HeroCarousel() {
   // Keep the viewport pinned to the top while locked, in case anything
   // (e.g. browser scroll restoration) nudges it.
   useEffect(() => {
-    if (locked) window.scrollTo(0, 0);
+    if (!locked) return;
+    window.scrollTo(0, 0);
+    const pin = () => {
+      if (window.scrollY !== 0) window.scrollTo(0, 0);
+    };
+    window.addEventListener("scroll", pin, { passive: true });
+    return () => window.removeEventListener("scroll", pin);
   }, [locked]);
 
   // Hide the native scrollbar while locked so it can't be dragged to skip
