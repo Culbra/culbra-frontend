@@ -65,7 +65,9 @@ body {
    can't be dragged to bypass the slide navigation (the page itself is still
    technically scrollable so that keyboard Tab focus can scroll off-screen
    elements into view — this only removes the visible, draggable handle). */
-html.scroll-locked {
+html.scroll-locked,
+html.scroll-locked body {
+  overflow: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }

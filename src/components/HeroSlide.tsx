@@ -1,3 +1,5 @@
+
+
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -61,9 +63,9 @@ export default function HeroSlide({
   onCtaClick,
 }: Omit<HeroSlideContent, "id">) {
   return (
-    <div className="relative flex min-h-0 w-full flex-1 flex-col-reverse items-stretch gap-0 pt-8 sm:pt-10 lg:flex-row lg:gap-4 lg:px-16 lg:pt-28">
+    <div className="relative flex min-h-0 w-full flex-1 flex-col-reverse items-stretch justify-center gap-0 pt-8 lg:justify-start sm:pt-10 lg:flex-row lg:gap-4 lg:px-16 lg:pt-28">
       <div
-        className={`relative z-10 flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden px-6 text-left sm:px-10 lg:mt-0 lg:flex-none lg:shrink-0 lg:justify-center lg:overflow-visible lg:px-0 lg:py-0 ${textColumnWidthClassName}`}
+        className={`relative z-10 flex min-h-0 flex-1 flex-col items-start justify-center overflow-hidden px-6 max-md:flex-none text-left sm:px-10 lg:mt-0 lg:flex-none lg:shrink-0 lg:justify-center lg:overflow-visible lg:px-0 lg:py-0 ${textColumnWidthClassName}`}
       >
         <h1
           className={`animate-fade-up font-extrabold uppercase leading-[1.08] tracking-normal sm:tracking-tight text-white ${headingSizeClassName}`}
