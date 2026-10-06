@@ -91,9 +91,10 @@ const SLIDES: Array<{
       "Portrait of a woman with white face paint wearing a traditional headwrap and a black blazer",
     imageObjectPosition: "object-top",
     imageFit: "contain",
-    imageWrapperClassName: "lg:self-center",
+    imageWrapperClassName: "lg:self-start lg:-mt-10",
+    imageScaleClassName: "lg:origin-top lg:scale-110",
     imageMaxHeightClassName:
-      "min-[1024px]:h-[62vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74vh]",
+      "min-[1024px]:h-[72vh] min-[1024px]:max-h-none min-[1280px]:h-[78vh] min-[1600px]:h-[84vh]",
   },
   {
     id: "seen",
@@ -121,9 +122,10 @@ const SLIDES: Array<{
       "Portrait of a man with tribal-pattern face and neck paint and a red beaded necklace",
     imageObjectPosition: "object-top",
     imageFit: "contain",
-    imageWrapperClassName: "lg:self-center",
+    imageWrapperClassName: "lg:self-start lg:-mt-10 max-md:-translate-y-3",
+    imageScaleClassName: "lg:origin-top lg:scale-110",
     imageMaxHeightClassName:
-      "min-[1024px]:h-[62vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74vh]",
+      "min-[1024px]:h-[72vh] min-[1024px]:max-h-none min-[1280px]:h-[78vh] min-[1600px]:h-[84vh]",
     headingSizeClassName: "text-[clamp(1.375rem,6dvh,2rem)] sm:text-5xl lg:text-5xl xl:text-7xl",
     bodySizeClassName:
       "max-w-md text-sm sm:text-base lg:max-w-xl lg:text-lg xl:max-w-2xl xl:text-xl",
@@ -156,9 +158,10 @@ const SLIDES: Array<{
       "Portrait of a woman with a red headband, face paint, and red beaded earrings",
     imageObjectPosition: "object-top",
     imageFit: "contain",
-    imageWrapperClassName: "lg:self-center",
+    imageWrapperClassName: "lg:self-start lg:-mt-10 max-md:-translate-y-3",
+    imageScaleClassName: "lg:origin-top lg:scale-110",
     imageMaxHeightClassName:
-      "min-[1024px]:h-[62vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[75vh]",
+      "min-[1024px]:h-[72vh] min-[1024px]:max-h-none min-[1280px]:h-[78vh] min-[1600px]:h-[84vh]",
     headingSizeClassName: "text-[clamp(1.375rem,6dvh,2rem)] sm:text-5xl lg:text-5xl xl:text-7xl",
     bodySizeClassName:
       "max-w-md text-xs sm:text-sm md:text-base lg:max-w-lg lg:text-lg xl:max-w-xl xl:text-lg",
@@ -187,19 +190,19 @@ const SLIDES: Array<{
     imageAlt:
       "Group of four people wearing black and tribal-print streetwear with Culbra branding",
     imageObjectPosition: "object-top",
-    imageFit: "contain",
+    imageFit: "cover",
     imageDesktopFit: "cover",
     imageDesktopFitBreakpoint: "xl",
-    imageWrapperClassName: "lg:self-center",
+    imageWrapperClassName: "lg:self-start lg:-mt-10",
     imageMarginClassName: "xl:mr-0",
     imageMaxHeightClassName:
-      "min-[1024px]:h-[68vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74.5vh]",
+      "min-[1024px]:h-[72vh] min-[1024px]:max-h-none min-[1280px]:h-[78vh] min-[1600px]:h-[84vh]",
     headingSizeClassName:
       "text-[clamp(1.5rem,7dvh,2.25rem)] sm:text-6xl lg:text-6xl xl:text-7xl md:whitespace-nowrap",
-    imageMobileHeightClassName: "h-[40dvh] min-h-[220px]",
-    imageScaleClassName: "",
+    imageMobileHeightClassName: "h-[38dvh] min-h-[220px]",
+    imageScaleClassName: "lg:origin-top lg:scale-110",
     imageWrapperMaskClassName:
-      "max-md:[mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]",
+      "max-md:[mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] lg:[mask-image:linear-gradient(to_right,transparent,black_16%,black_94%,transparent)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent,black_16%,black_94%,transparent)]",
     showEdgeFade: false,
   },
 ];
@@ -405,7 +408,7 @@ export default function HeroCarousel() {
 
   return (
     <section className="relative flex h-dvh flex-col overflow-hidden bg-black md:h-auto md:min-h-screen">
-      <Navbar />
+      <Navbar onNavigate={unlock} />
 
       <HeroSlide
         key={slide.id}
