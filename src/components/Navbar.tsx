@@ -31,7 +31,7 @@ export default function Navbar({ onNavigate }: { onNavigate?: () => void }) {
       <nav className="flex w-full items-center justify-between px-6 py-6 lg:px-16">
         <Logo />
 
-        <div className="flex items-center gap-3 sm:gap-5 lg:mr-8 xl:mr-64">
+        <div className="flex items-center gap-3 sm:gap-5">
           <a
             href="#after-hero"
             onClick={handleClick}

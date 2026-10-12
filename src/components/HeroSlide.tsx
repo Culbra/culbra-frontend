@@ -48,7 +48,7 @@ export default function HeroSlide({
   imageMarginClassName = "xl:mr-24",
   imageMobileWidthClassName = "w-full",
   imageMaxHeightClassName = "min-[1024px]:max-h-[640px] min-[1280px]:max-h-[760px]",
-  headingSizeClassName = "text-[clamp(1.375rem,6dvh,2rem)] sm:text-5xl lg:text-6xl xl:text-8xl",
+  headingSizeClassName = "text-[clamp(1.375rem,6dvh,2rem)] sm:text-5xl lg:text-5xl xl:text-7xl",
   bodySizeClassName = "max-w-md text-sm sm:text-base lg:max-w-lg lg:text-lg xl:max-w-xl xl:text-xl",
   textColumnWidthClassName = "lg:w-[min(46vw,36rem)] xl:w-[min(48vw,42rem)]",
   imageMobileHeightClassName = "h-[43dvh] min-h-[230px]",
@@ -128,6 +128,7 @@ export default function HeroSlide({
           alt={imageAlt}
           fill
           priority
+          sizes="(min-width: 1024px) 50vw, 100vw"
           className={`animate-fade-scale ${imageFit === "contain" ? "object-contain" : "object-cover"} ${
             imageDesktopFit === "contain"
               ? imageDesktopFitBreakpoint === "xl"
@@ -138,7 +139,7 @@ export default function HeroSlide({
                   ? "xl:object-cover"
                   : "lg:object-cover"
                 : ""
-          } ${imageObjectPosition} ${imageScaleClassName} ${imageMobileBottomFade ? "max-md:[mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)]" : ""}`}
+          } ${imageObjectPosition} ${imageScaleClassName} ${imageMobileBottomFade ? "max-md:[mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)]" : ""} lg:[mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)] lg:[-webkit-mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)]`}
           style={{ animationDelay: "250ms" }}
         />
         {showEdgeFade && (

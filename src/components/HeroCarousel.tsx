@@ -58,10 +58,11 @@ const SLIDES: Array<{
     imageSrc: "/images/hero-portrait-headwrap.jpg",
     imageAlt:
       "Side profile of a woman wearing a colorful tribal-print headwrap and gold jewelry",
-    imageObjectPosition: "object-top",
+    imageObjectPosition: "object-top lg:object-bottom",
     imageFit: "contain",
     imageDesktopFit: "contain",
-    imageWrapperClassName: "lg:self-center",
+    imageWrapperClassName: "lg:self-end lg:overflow-visible!",
+    imageScaleClassName: "lg:origin-bottom lg:scale-125",
     imageMaxHeightClassName:
       "min-[1024px]:h-[62vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74vh]",
     imageMobileWidthClassName: "w-full",
@@ -97,6 +98,8 @@ const SLIDES: Array<{
     imageScaleClassName: "lg:origin-top lg:scale-110",
     imageMaxHeightClassName:
       "min-[1024px]:h-[62vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74vh]",
+    imageWrapperMaskClassName:
+      "lg:[mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent),linear-gradient(to_bottom,black_84%,transparent_100%)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent),linear-gradient(to_bottom,black_84%,transparent_100%)] lg:[mask-composite:intersect] lg:[-webkit-mask-composite:source-in]",
   },
   {
     id: "seen",
@@ -128,6 +131,8 @@ const SLIDES: Array<{
     imageScaleClassName: "lg:origin-top lg:scale-110",
     imageMaxHeightClassName:
       "min-[1024px]:h-[62vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74vh]",
+    imageWrapperMaskClassName:
+      "lg:[mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent),linear-gradient(to_bottom,black_84%,transparent_100%)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent),linear-gradient(to_bottom,black_84%,transparent_100%)] lg:[mask-composite:intersect] lg:[-webkit-mask-composite:source-in]",
     headingSizeClassName: "text-[clamp(1.375rem,6dvh,2rem)] sm:text-5xl lg:text-5xl xl:text-7xl",
     bodySizeClassName:
       "max-w-md text-sm sm:text-base lg:max-w-xl lg:text-lg xl:max-w-2xl xl:text-xl",
@@ -164,6 +169,8 @@ const SLIDES: Array<{
     imageScaleClassName: "",
     imageMaxHeightClassName:
       "min-[1024px]:h-[calc(62vh+4rem)] min-[1024px]:max-h-none min-[1280px]:h-[calc(68vh+4rem)] min-[1600px]:h-[calc(74vh+4rem)]",
+    imageWrapperMaskClassName:
+      "lg:[mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent),linear-gradient(to_bottom,black_84%,transparent_100%)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent),linear-gradient(to_bottom,black_84%,transparent_100%)] lg:[mask-composite:intersect] lg:[-webkit-mask-composite:source-in]",
     headingSizeClassName: "text-[clamp(1.375rem,6dvh,2rem)] sm:text-5xl lg:text-5xl xl:text-7xl",
     bodySizeClassName:
       "max-w-md text-xs sm:text-sm md:text-base lg:max-w-lg lg:text-lg xl:max-w-xl xl:text-lg",
@@ -204,7 +211,7 @@ const SLIDES: Array<{
     imageMobileHeightClassName: "h-[38dvh] min-h-[220px]",
     imageScaleClassName: "lg:origin-top lg:scale-110",
     imageWrapperMaskClassName:
-      "max-md:[mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] lg:[mask-image:linear-gradient(to_right,transparent,black_16%,black_94%,transparent)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent,black_16%,black_94%,transparent)]",
+      "max-md:[mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)] lg:[mask-image:linear-gradient(to_right,transparent,black_16%,black_94%,transparent),linear-gradient(to_bottom,black_84%,transparent_100%)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent,black_16%,black_94%,transparent),linear-gradient(to_bottom,black_84%,transparent_100%)] lg:[mask-composite:intersect] lg:[-webkit-mask-composite:source-in]",
     showEdgeFade: false,
   },
 ];
