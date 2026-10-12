@@ -160,7 +160,7 @@ const SLIDES: Array<{
       "Portrait of a woman with a red headband, face paint, and red beaded earrings",
     imageObjectPosition: "object-top",
     imageFit: "contain",
-    imageWrapperClassName: "lg:self-start lg:-mt-[6.5rem] max-md:-translate-y-3",
+    imageWrapperClassName: "lg:self-start lg:-mt-[6.5rem]! max-md:-translate-y-3",
     imageScaleClassName: "",
     imageMaxHeightClassName:
       "min-[1024px]:h-[calc(62vh+4rem)] min-[1024px]:max-h-none min-[1280px]:h-[calc(68vh+4rem)] min-[1600px]:h-[calc(74vh+4rem)]",
