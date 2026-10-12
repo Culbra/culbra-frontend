@@ -63,7 +63,7 @@ export default function HeroSlide({
   onCtaClick,
 }: Omit<HeroSlideContent, "id">) {
   return (
-    <div className="relative flex min-h-0 w-full flex-1 flex-col-reverse items-stretch justify-center gap-0 pt-8 lg:justify-start sm:pt-10 lg:flex-row lg:gap-4 lg:px-16 lg:pt-28">
+    <div className="hero-slide relative flex min-h-0 w-full flex-1 flex-col-reverse items-stretch justify-center gap-0 pt-8 lg:justify-start sm:pt-10 lg:flex-row lg:gap-4 lg:px-16 lg:pt-28">
       <div
         className={`relative z-10 flex min-h-0 flex-1 flex-col items-start justify-center overflow-hidden px-6 max-md:flex-none text-left sm:px-10 lg:mt-0 lg:flex-none lg:shrink-0 lg:justify-center lg:overflow-visible lg:px-0 lg:py-0 ${textColumnWidthClassName}`}
       >
@@ -75,14 +75,14 @@ export default function HeroSlide({
         </h1>
 
         <p
-          className={`animate-fade-up mt-5 leading-snug sm:mt-6 sm:leading-relaxed text-white/80 ${bodySizeClassName}`}
+          className={`hero-body animate-fade-up mt-5 leading-snug sm:mt-6 sm:leading-relaxed text-white/80 ${bodySizeClassName}`}
           style={{ animationDelay: "500ms" }}
         >
           {body}
         </p>
 
         <p
-          className="animate-fade-up mt-4 flex items-center gap-2 text-sm font-semibold text-culbra-green sm:mt-8 sm:text-lg xl:text-2xl"
+          className="hero-tagline animate-fade-up mt-4 flex items-center gap-2 text-sm font-semibold text-culbra-green sm:mt-8 sm:text-lg xl:text-2xl"
           style={{ animationDelay: "850ms" }}
         >
           {tagline}
@@ -90,7 +90,7 @@ export default function HeroSlide({
 
         {subline && (
           <p
-            className="animate-fade-up mt-3 text-base font-bold text-white sm:mt-4 sm:text-xl xl:text-2xl"
+            className="hero-subline animate-fade-up mt-3 text-base font-bold text-white sm:mt-4 sm:text-xl xl:text-2xl"
             style={{ animationDelay: "1000ms" }}
           >
             {subline}
@@ -102,7 +102,7 @@ export default function HeroSlide({
             <button
               type="button"
               onClick={onCtaClick}
-              className="animate-fade-up group mt-3 inline-flex items-center gap-3 rounded-full border border-culbra-green px-5 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-culbra-green hover:text-black sm:mt-8 sm:px-6 sm:py-3 sm:text-base"
+              className="hero-cta animate-fade-up group mt-3 inline-flex items-center gap-3 rounded-full border border-culbra-green px-5 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-culbra-green hover:text-black sm:mt-8 sm:px-6 sm:py-3 sm:text-base"
               style={{ animationDelay: "1150ms" }}
             >
               {ctaLabel}
@@ -111,7 +111,7 @@ export default function HeroSlide({
           ) : (
             <a
               href={ctaHref}
-              className="animate-fade-up group mt-3 inline-flex items-center gap-3 rounded-full border border-culbra-green px-5 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-culbra-green hover:text-black sm:mt-8 sm:px-6 sm:py-3 sm:text-base"
+              className="hero-cta animate-fade-up group mt-3 inline-flex items-center gap-3 rounded-full border border-culbra-green px-5 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-culbra-green hover:text-black sm:mt-8 sm:px-6 sm:py-3 sm:text-base"
               style={{ animationDelay: "1150ms" }}
             >
               {ctaLabel}
