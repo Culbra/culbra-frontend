@@ -39,3 +39,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Sections kept local (only the hero and countdown sections are published)
+/brand/
+/src/fonts/
+/src/data/
+/src/app/register/
+/src/components/AboutSection.tsx
+/src/components/ChallengeCards.tsx
+/src/components/EnterArenaBanner.tsx
+/src/components/ExpectSection.tsx
+/src/components/JourneySection.tsx
+/src/components/PrizeSection.tsx
+/src/components/RegisterForm.tsx
+/src/components/Reveal.tsx
+/src/components/StatsStrip.tsx
+/src/lib/register.ts
+/src/lib/identity.ts

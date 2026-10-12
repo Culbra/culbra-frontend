@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Logo from "./Logo";
+
+const REGISTER_HREF = process.env.NEXT_PUBLIC_REGISTER_HREF ?? "#countdown";
 
 export default function Navbar({ onNavigate }: { onNavigate?: () => void }) {
   const [scrolled, setScrolled] = useState(false);
@@ -36,13 +39,12 @@ export default function Navbar({ onNavigate }: { onNavigate?: () => void }) {
           >
             Partner with us
           </a>
-          <a
-            href="#after-hero"
-            onClick={handleClick}
+          <Link
+            href={REGISTER_HREF}
             className="rounded-full bg-culbra-green px-2.5 py-1 text-[9px] font-bold tracking-wide text-black uppercase transition-opacity hover:opacity-90 sm:px-5 sm:py-2 sm:text-sm"
           >
             Register
-          </a>
+          </Link>
         </div>
       </nav>
     </header>

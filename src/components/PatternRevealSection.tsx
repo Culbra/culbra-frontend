@@ -138,7 +138,7 @@ export default function PatternRevealSection() {
 
   return (
     <section
-      id="after-hero"
+      id="countdown"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className="relative flex min-h-screen items-center justify-center overflow-hidden bg-cover bg-center px-6 text-center"
@@ -159,25 +159,25 @@ export default function PatternRevealSection() {
               label="Days"
               value={countdown.days}
               progress={countdown.daysProgress}
-              color="#1db980"
+              color="#12a066"
             />
             <CountdownRing
               label="Hrs"
               value={countdown.hours}
               progress={countdown.hoursProgress}
-              color="#1db980"
+              color="#12a066"
             />
             <CountdownRing
               label="Mins"
               value={countdown.minutes}
               progress={countdown.minutesProgress}
-              color="#4fcf9f"
+              color="#3dbb85"
             />
             <CountdownRing
               label="Secs"
               value={countdown.seconds}
               progress={countdown.secondsProgress}
-              color="#7fe0bc"
+              color="#6fd0a6"
             />
           </div>
         )}
