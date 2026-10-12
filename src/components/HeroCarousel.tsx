@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Navbar from "./Navbar";
 import FeatureRow, { type FeatureLabel } from "./FeatureRow";
 import HeroSlide from "./HeroSlide";
+import { smoothScrollTo } from "@/lib/smoothScroll";
 
 const SLIDES: Array<{
   id: string;
@@ -63,7 +64,8 @@ const SLIDES: Array<{
     imageWrapperClassName: "lg:self-center",
     imageMaxHeightClassName:
       "min-[1024px]:h-[62vh] min-[1024px]:max-h-none min-[1280px]:h-[68vh] min-[1600px]:h-[74vh]",
-    imageMobileWidthClassName: "w-full max-md:mt-6",
+    imageMobileWidthClassName: "w-full",
+    imageMobileHeightClassName: "max-md:aspect-[3/2] max-md:h-auto",
     imageMobileBottomFade: true,
   },
   {
@@ -212,24 +214,6 @@ const TOUCH_THRESHOLD = 50;
 const GESTURE_COOLDOWN_MS = 750;
 const UNLOCK_SCROLL_DURATION_MS = 1400;
 
-const easeInOutCubic = (t: number) =>
-  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-function smoothScrollTo(targetY: number, duration: number) {
-  const startY = window.scrollY;
-  const distance = targetY - startY;
-  const startTime = performance.now();
-
-  function step(now: number) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    window.scrollTo(0, startY + distance * easeInOutCubic(progress));
-    if (progress < 1) requestAnimationFrame(step);
-  }
-
-  requestAnimationFrame(step);
-}
-
 export default function HeroCarousel() {
   const [active, setActive] = useState(0);
   // The hero is locked on every screen size until the user clicks
@@ -261,11 +245,19 @@ export default function HeroCarousel() {
     [goTo],
   );
 
-  const unlock = useCallback(() => {
+  const unlock = useCallback((targetId: string = "after-hero") => {
     setLocked(false);
-    const target = document.getElementById("after-hero");
+    const target =
+      document.getElementById(targetId) ?? document.getElementById("countdown");
     if (target) {
-      const targetY = target.getBoundingClientRect().top + window.scrollY;
+      // Line the section's bottom edge up with the bottom of the screen, so
+      // the whole strip is in view (it's short — aligning its top would
+      // mostly show the section below it).
+      const rect = target.getBoundingClientRect();
+      const targetY = Math.max(
+        0,
+        rect.bottom + window.scrollY - window.innerHeight,
+      );
       smoothScrollTo(targetY, UNLOCK_SCROLL_DURATION_MS);
     }
   }, []);
@@ -408,7 +400,7 @@ export default function HeroCarousel() {
 
   return (
     <section className="relative flex h-dvh flex-col overflow-hidden bg-black md:h-auto md:min-h-screen">
-      <Navbar onNavigate={unlock} />
+      <Navbar onNavigate={() => unlock()} />
 
       <HeroSlide
         key={slide.id}
@@ -437,7 +429,7 @@ export default function HeroCarousel() {
         subline={slide.subline}
         ctaLabel={slide.ctaLabel}
         ctaHref={slide.ctaHref}
-        onCtaClick={isLastSlide ? unlock : undefined}
+        onCtaClick={isLastSlide ? () => unlock() : undefined}
       />
 
       <FeatureRow accent={slide.accent} />
