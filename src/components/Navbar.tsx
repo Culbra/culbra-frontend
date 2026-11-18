@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 
-const REGISTER_HREF = process.env.NEXT_PUBLIC_REGISTER_HREF ?? "#countdown";
+const REGISTER_HREF = process.env.NEXT_PUBLIC_REGISTER_HREF ?? "/register";
 
-export default function Navbar({ onNavigate }: { onNavigate?: () => void }) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -15,12 +15,6 @@ export default function Navbar({ onNavigate }: { onNavigate?: () => void }) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const handleClick = (e: React.MouseEvent) => {
-    if (!onNavigate) return;
-    e.preventDefault();
-    onNavigate();
-  };
 
   return (
     <header
@@ -32,13 +26,12 @@ export default function Navbar({ onNavigate }: { onNavigate?: () => void }) {
         <Logo />
 
         <div className="flex items-center gap-3 sm:gap-5">
-          <a
-            href="#after-hero"
-            onClick={handleClick}
+          <Link
+            href="/partner#partner-form"
             className="text-[9px] font-bold tracking-wide text-white uppercase transition-colors hover:text-culbra-green sm:text-sm"
           >
             Partner with us
-          </a>
+          </Link>
           <Link
             href={REGISTER_HREF}
             className="rounded-full bg-culbra-green px-2.5 py-1 text-[9px] font-bold tracking-wide text-black uppercase transition-opacity hover:opacity-90 sm:px-5 sm:py-2 sm:text-sm"

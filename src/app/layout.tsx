@@ -85,6 +85,13 @@ const jsonLd = {
       url: SITE_URL,
       logo: `${SITE_URL}/icon.png`,
       description: DESCRIPTION,
+      sameAs: [
+        "https://x.com/culbraafrica",
+        "https://www.facebook.com/CulbraAfrica",
+        "https://www.instagram.com/culbrafrica",
+        "https://www.youtube.com/@culbraafrica",
+        "https://www.tiktok.com/@culbraafrica",
+      ],
     },
     {
       "@type": "WebSite",
