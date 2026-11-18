@@ -102,7 +102,7 @@ export default function HeroSlide({
             <button
               type="button"
               onClick={onCtaClick}
-              className="hero-cta animate-fade-up group mt-3 inline-flex items-center gap-3 rounded-full border border-culbra-green px-5 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-culbra-green hover:text-black sm:mt-8 sm:px-6 sm:py-3 sm:text-base"
+              className="hero-cta animate-fade-up group mt-3 inline-flex items-center gap-3 rounded-full border border-culbra-green bg-culbra-green px-5 py-2 text-sm font-extrabold tracking-wide text-black uppercase shadow-[0_8px_28px_-6px_rgba(18,160,102,0.65)] transition-[scale,background-color,box-shadow] hover:scale-105 hover:bg-[#16b674] hover:shadow-[0_10px_34px_-4px_rgba(18,160,102,0.8)] sm:mt-8 sm:px-6 sm:py-3 sm:text-base"
               style={{ animationDelay: "1150ms" }}
             >
               {ctaLabel}
@@ -111,7 +111,7 @@ export default function HeroSlide({
           ) : (
             <a
               href={ctaHref}
-              className="hero-cta animate-fade-up group mt-3 inline-flex items-center gap-3 rounded-full border border-culbra-green px-5 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-culbra-green hover:text-black sm:mt-8 sm:px-6 sm:py-3 sm:text-base"
+              className="hero-cta animate-fade-up group mt-3 inline-flex items-center gap-3 rounded-full border border-culbra-green bg-culbra-green px-5 py-2 text-sm font-extrabold tracking-wide text-black uppercase shadow-[0_8px_28px_-6px_rgba(18,160,102,0.65)] transition-[scale,background-color,box-shadow] hover:scale-105 hover:bg-[#16b674] hover:shadow-[0_10px_34px_-4px_rgba(18,160,102,0.8)] sm:mt-8 sm:px-6 sm:py-3 sm:text-base"
               style={{ animationDelay: "1150ms" }}
             >
               {ctaLabel}

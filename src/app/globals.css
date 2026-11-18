@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Tailwind skips git-ignored files when it looks for classes. Several page
+   sections are git-ignored, so list the source folder explicitly. */
+@source "../**/*.{ts,tsx}";
+
 :root {
   color-scheme: light dark;
   --background: #0a0a0a;
@@ -75,6 +79,23 @@ html.scroll-locked body {
 
 html.scroll-locked::-webkit-scrollbar {
   display: none;
+}
+
+/* Swipe hint on the prize cards: the arrow nudges right and back. */
+@keyframes swipe-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[swipe-nudge_1\.4s_ease-in-out_infinite\] {
+    animation: none;
+  }
 }
 
 /* Endless horizontal ticker: the track holds two identical copies, so
@@ -170,5 +191,29 @@ html.scroll-locked::-webkit-scrollbar {
     margin-top: 0.9rem !important;
     padding-block: 0.55rem !important;
     font-size: 0.875rem !important;
+  }
+}
+
+/* Partners banner photo: fades its edges into the green banner.
+   Phones (photo under the text): soft top and bottom.
+   Tablet and up (photo on the right): left side and bottom, plus a touch on
+   the right where it meets the screen edge. */
+.partner-photo-fade {
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 12%, #000 78%, transparent 100%);
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 12%, #000 78%, transparent 100%);
+}
+
+@media (min-width: 768px) {
+  .partner-photo-fade {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 30%, #000 88%, transparent 100%),
+      linear-gradient(to bottom, #000 70%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 30%, #000 88%, transparent 100%),
+      linear-gradient(to bottom, #000 70%, transparent 100%);
+    mask-composite: intersect;
   }
 }

@@ -195,9 +195,9 @@ const SLIDES: Array<{
     subline: <>Are you ready to enter the arena?</>,
     ctaLabel: "Explore Culbra",
     ctaHref: "#programs",
-    imageSrc: "/images/hero-group-v3.jpg",
+    imageSrc: "/images/hero-group-v4.jpg",
     imageAlt:
-      "Group of four people wearing black and tribal-print streetwear with Culbra branding",
+      "A large, smiling group of young Nigerians in black and white CULBRA T-shirts, styled with Ankara prints, denim and sunglasses",
     imageObjectPosition: "object-top",
     imageFit: "cover",
     imageDesktopFit: "cover",
@@ -224,8 +224,13 @@ const UNLOCK_SCROLL_DURATION_MS = 1400;
 export default function HeroCarousel() {
   const [active, setActive] = useState(0);
   // The hero is locked on every screen size until the user clicks
-  // "Explore Culbra" on the last slide.
-  const [locked, setLocked] = useState(true);
+  // "Explore Culbra" on the last slide. Arriving with a section in the
+  // address (e.g. a footer link to /#faq from another page) skips the lock,
+  // so the browser can scroll to that section. `locked` isn't rendered, so
+  // reading the URL here can't cause a hydration mismatch.
+  const [locked, setLocked] = useState(
+    () => typeof window === "undefined" || !window.location.hash,
+  );
 
   const activeRef = useRef(active);
   activeRef.current = active;
@@ -254,8 +259,7 @@ export default function HeroCarousel() {
 
   const unlock = useCallback((targetId: string = "after-hero") => {
     setLocked(false);
-    const target =
-      document.getElementById(targetId) ?? document.getElementById("countdown");
+    const target = document.getElementById(targetId);
     if (target) {
       // Line the section's bottom edge up with the bottom of the screen, so
       // the whole strip is in view (it's short — aligning its top would
@@ -407,7 +411,7 @@ export default function HeroCarousel() {
 
   return (
     <section className="relative flex h-dvh flex-col overflow-hidden bg-black md:h-auto md:min-h-screen">
-      <Navbar onNavigate={() => unlock()} />
+      <Navbar />
 
       <HeroSlide
         key={slide.id}
