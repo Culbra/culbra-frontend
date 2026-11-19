@@ -140,7 +140,6 @@ export default function HeroSlide({
                   : "lg:object-cover"
                 : ""
           } ${imageObjectPosition} ${imageScaleClassName} ${imageMobileBottomFade ? "max-md:[mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)] max-md:[-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_94%)]" : ""} lg:[mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)] lg:[-webkit-mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)]`}
-          style={{ animationDelay: "250ms" }}
         />
         {showEdgeFade && (
           <div

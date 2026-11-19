@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Navbar from "./Navbar";
 import FeatureRow, { type FeatureLabel } from "./FeatureRow";
+import Image from "next/image";
 import HeroSlide from "./HeroSlide";
 import { smoothScrollTo } from "@/lib/smoothScroll";
 
@@ -444,6 +445,25 @@ export default function HeroCarousel() {
       />
 
       <FeatureRow accent={slide.accent} />
+
+      {/* Fetch the other slides' photos in the background so they are already
+          cached when the visitor moves to them. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0"
+      >
+        {SLIDES.filter((s) => s.id !== slide.id).map((s) => (
+          <Image
+            key={s.id}
+            src={s.imageSrc}
+            alt=""
+            fill
+            loading="eager"
+            fetchPriority="low"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+          />
+        ))}
+      </div>
 
       {SLIDES.length > 1 && (
         <div className="absolute right-4 top-[calc(50%-1rem)] z-20 flex -translate-y-1/2 flex-col gap-3 sm:right-6 xl:right-16">
