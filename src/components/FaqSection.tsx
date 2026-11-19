@@ -97,10 +97,6 @@ const FAQS: { q: string; a: string[] }[] = [
       "This edition of CULBRA is designed for Nigerians interested in demonstrating their cultural values, intelligence, creativity, and practical problem-solving abilities and taking the prize home.",
     ],
   },
-  {
-    q: "Who is organising CULBRA?",
-    a: ["CULBRA is a project organised by Moov."],
-  },
 ];
 
 function FaqItem({
