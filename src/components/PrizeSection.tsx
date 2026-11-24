@@ -50,17 +50,50 @@ const PRIZES: {
   amount: string;
   place: string;
   order: string;
+  perks: [string, string][];
 }[] = [
-  { metal: "gold", amount: "₦5M", place: "1st place", order: "order-2" },
-  { metal: "silver", amount: "₦3M", place: "2nd place", order: "order-3" },
-  { metal: "bronze", amount: "₦2M", place: "3rd place", order: "order-1" },
+  {
+    metal: "gold",
+    amount: "₦5 Million",
+    place: "1st place",
+    order: "order-2",
+    perks: [
+      ["4 Million Naira", " in cash."],
+      ["1 Million Naira", " in Content Studio setup."],
+      ["Recognition", " and visibility as CULBRA’s first place winner."],
+      ["Opportunities", " that follow you long after the challenge."],
+    ],
+  },
+  {
+    metal: "silver",
+    amount: "₦2 Million",
+    place: "2nd place",
+    order: "order-3",
+    perks: [
+      ["1.5 Million Naira", " in cash."],
+      ["500 Thousand Naira", " in Content Studio setup."],
+      ["Recognition", " and visibility as CULBRA’s second place winner."],
+      ["Opportunities", " that follow you long after the challenge."],
+    ],
+  },
+  {
+    metal: "bronze",
+    amount: "₦1 Million",
+    place: "3rd place",
+    order: "order-1",
+    perks: [
+      ["1 Million Naira", " in cash."],
+      ["Recognition", " and visibility as CULBRA’s third place winner."],
+      ["Opportunities", " that follow you long after the challenge."],
+    ],
+  },
 ];
 
 // Card sizes in px at the desktop scale (1em = 16px). Every size inside a
 // card is in em, so the whole podium scales by changing one font size.
 const SIZES = {
-  side: { w: 220, h: 370, plateH: 100, plateInset: 16, name: 32, amount: 19, place: 11 },
-  gold: { w: 250, h: 420, plateH: 115, plateInset: 17, name: 38, amount: 23, place: 12 },
+  side: { w: 230, h: 440, plateH: 100, plateInset: 16, name: 32, amount: 19, place: 11 },
+  gold: { w: 260, h: 490, plateH: 115, plateInset: 17, name: 38, amount: 23, place: 12 },
 };
 
 const em = (px: number) => `${px / 16}em`;
@@ -157,17 +190,14 @@ function PrizeCard({
   metal,
   amount,
   place,
+  perks,
 }: {
   metal: Metal;
   amount: string;
   place: string;
+  perks: [string, string][];
 }) {
   const m = METALS[metal];
-  const perks: [string, string][] = [
-    [amount, ` cash prize for ${place}.`],
-    ["Recognition", " and visibility as one of CULBRA’s winners."],
-    ["Opportunities", " and momentum that follow you long after the Arena."],
-  ];
   const isGold = metal === "gold";
   const z = isGold ? SIZES.gold : SIZES.side;
   const plateW = z.w - z.plateInset * 2;
@@ -263,27 +293,15 @@ function PrizeCard({
               textShadow: emboss,
             }}
           >
-            {metal}
-          </p>
-          <p
-            className={`${barlow.className} font-bold tabular-nums`}
-            style={{
-              fontSize: em(z.amount),
-              lineHeight: 1.1,
-              marginTop: em(2),
-              textShadow: emboss,
-            }}
-          >
             {amount}
           </p>
           <p
-            className={`${barlow.className} font-semibold uppercase`}
+            className={`${barlow.className} font-bold uppercase`}
             style={{
-              fontSize: em(z.place),
+              fontSize: em(z.amount),
               lineHeight: 1.1,
-              marginTop: em(1),
-              letterSpacing: "0.14em",
-              opacity: 0.85,
+              marginTop: em(4),
+              textShadow: emboss,
             }}
           >
             {place}
@@ -308,16 +326,16 @@ function PrizeCard({
       {/* The details: perks, then a metal Register Now pill. Fills the
           space between the plate and the start of the taper. */}
       <div
-        className="absolute flex flex-col items-center justify-center"
+        className="absolute flex flex-col items-center justify-start"
         style={{
-          top: em(z.plateInset + 2 + z.plateH + 8),
+          top: em(z.plateInset + 2 + z.plateH + 18),
           bottom: "12%",
           left: em(isGold ? 22 : 18),
           right: em(isGold ? 20 : 16),
           gap: em(isGold ? 18 : 14),
         }}
       >
-        <ul className="w-full" style={{ fontSize: em(isGold ? 12.5 : 12) }}>
+        <ul className="w-full" style={{ fontSize: em(isGold ? 12 : 11.5) }}>
           {perks.map(([lead, rest]) => (
             <li
               key={lead}

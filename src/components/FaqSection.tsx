@@ -9,20 +9,20 @@ const FAQS: { q: string; a: string[] }[] = [
   {
     q: "What is CULBRA?",
     a: [
-      "CULBRA, which stands for Culture and Brains, is an eight-week youth impact competition designed to promote cultural values, intellectual excellence, integrity, and practical problem-solving in Nigeria.",
+      "CULBRA, which stands for Culture and Brains, is an eight-week youth crevtivity base competition designed to promote cultural values, intellectual excellence, integrity, and practical problem-solving in Nigeria.",
       "The competition challenges participants to demonstrate not only what they know, but also how they apply their knowledge, skills, creativity, and values to real-world problems and stand a chance to win from a 10 million Naira prize pool.",
     ],
   },
   {
     q: "What is CULBRA’s purpose?",
     a: [
-      "CULBRA was created to rebuild the values that should define Nigerian society, at a time when cultural identity, integrity, and dignity are increasingly neglected. It aims to raise a generation that combines strong character with practical intelligence by promoting cultural values, critical thinking, practical skills, and entrepreneurship, and by showing that culture and intelligence must be reflected in people’s actions, not just discussed.",
+      "CULBRA was created to rebuild the values that should define Nigerian society, at a time when cultural identity, integrity and dignity are increasingly neglected. It aims to raise a generation that combines strong character with practical intelligence by promoting cultural values, critical thinking, practical skills, and entrepreneurship, and by showing that culture and intelligence must be reflected in people’s actions, not just discussed.",
     ],
   },
   {
     q: "What makes CULBRA different from other youth competitions?",
     a: [
-      "CULBRA goes beyond conventional talent displays. Participants are challenged to demonstrate their abilities through practical tasks involving cultural values, social responsibility, economic problem-solving, entrepreneurship, technology, and communication, thereby sharing a part in impacting and building the nation.",
+      "CULBRA goes beyond conventional talent displays. Participants are challenged to demonstrate their abilities through practical fun and creative tasks involving cultural values, social responsibility, economic problem-solving, entrepreneurship, technology, and communication, thereby sharing a part in impacting and building the nation.",
       "The competition focuses on both who participants are and what they can do for the nation.",
     ],
   },
@@ -35,12 +35,14 @@ const FAQS: { q: string; a: string[] }[] = [
   },
   {
     q: "Is there a registration fee?",
-    a: ["Yes, there is a very friendly registration fee."],
+    a: [
+      "No, the participant are given a task to be summited as their qualification for entry. Some lucky participant will be selected to compete",
+    ],
   },
   {
     q: "Why should I register for CULBRA?",
     a: [
-      "You stand a chance to win from 5 million Naira, 2 million Naira, 1 million Naira, and/or from a 2 million Naira extra prize pool.",
+      "You stand ti represent your culture, gain traction and win from the 10 million price pool.",
     ],
   },
   {
@@ -53,7 +55,7 @@ const FAQS: { q: string; a: string[] }[] = [
   {
     q: "Can I participate if I am not an expert in every pillar?",
     a: [
-      "You do not need to be an expert in any pillar. You just need to have zeal to pass a message that will drive development.",
+      "You do not need to be an expert in any pillar. You just need to have creativity and zeal to re-present and a message that will drive development.",
     ],
   },
   {
@@ -125,11 +127,10 @@ function FaqItem({
         >
           {q}
           <span
-            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
-              open
+            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${open
                 ? "rotate-45 border-[#fc8a0d] bg-[#fc8a0d] text-black"
                 : "border-black/20 dark:border-white/20"
-            }`}
+              }`}
             aria-hidden="true"
           >
             <Plus size={16} />
@@ -140,9 +141,8 @@ function FaqItem({
         id={`${id}-a`}
         role="region"
         aria-labelledby={`${id}-q`}
-        className={`grid transition-[grid-template-rows] duration-300 ease-in-out motion-reduce:transition-none ${
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
+        className={`grid transition-[grid-template-rows] duration-300 ease-in-out motion-reduce:transition-none ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          }`}
       >
         <div className="overflow-hidden" inert={!open}>
           <div className="max-w-2xl space-y-3 pr-14 pb-6 text-sm leading-relaxed text-black/75 sm:text-base dark:text-white/75">
