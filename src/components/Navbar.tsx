@@ -6,7 +6,13 @@ import Logo from "./Logo";
 
 const REGISTER_HREF = process.env.NEXT_PUBLIC_REGISTER_HREF ?? "/register";
 
-export default function Navbar() {
+export default function Navbar({
+  onExplore,
+}: {
+  /** When provided, the nav shows a single "Explore" button instead of the
+   *  "Partner with us" and "Register" buttons. */
+  onExplore?: () => void;
+}) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -26,18 +32,30 @@ export default function Navbar() {
         <Logo />
 
         <div className="flex items-center gap-3 sm:gap-5">
-          <Link
-            href="/partner#partner-form"
-            className="text-[9px] font-bold tracking-wide text-white uppercase transition-colors hover:text-culbra-green sm:text-sm"
-          >
-            Partner with us
-          </Link>
-          <Link
-            href={REGISTER_HREF}
-            className="rounded-full bg-culbra-green px-2.5 py-1 text-[9px] font-bold tracking-wide text-black uppercase transition-opacity hover:opacity-90 sm:px-5 sm:py-2 sm:text-sm"
-          >
-            Register
-          </Link>
+          {onExplore ? (
+            <button
+              type="button"
+              onClick={onExplore}
+              className="rounded-full bg-culbra-green px-2.5 py-1 text-[9px] font-bold tracking-wide text-black uppercase transition-opacity hover:opacity-90 sm:px-5 sm:py-2 sm:text-sm"
+            >
+              Explore
+            </button>
+          ) : (
+            <>
+              <Link
+                href="/partner#partner-form"
+                className="text-[9px] font-bold tracking-wide text-white uppercase transition-colors hover:text-culbra-green sm:text-sm"
+              >
+                Partner with us
+              </Link>
+              <Link
+                href={REGISTER_HREF}
+                className="rounded-full bg-culbra-green px-2.5 py-1 text-[9px] font-bold tracking-wide text-black uppercase transition-opacity hover:opacity-90 sm:px-5 sm:py-2 sm:text-sm"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>

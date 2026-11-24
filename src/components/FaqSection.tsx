@@ -65,7 +65,7 @@ const FAQS: { q: string; a: string[] }[] = [
   {
     q: "What will sponsors gain from partnering with CULBRA?",
     a: [
-      "Depending on the partnership arrangement, sponsors will benefit from an audience pool of 100,000 participants. They will gain brand visibility, engagement with participants and audiences, product demonstrations, opportunities to showcase their solutions, and association with a youth-development initiative promoting positive social change. Specific benefits and deliverables will be agreed upon with each partner. Apply for partnership via the website.",
+      "Depending on the partnership arrangement, sponsors will benefit from an audience pool of 300,000 participants. They will gain brand visibility, engagement with participants and audiences, product demonstrations, opportunities to showcase their solutions, and association with a youth-development initiative promoting positive social change. Specific benefits and deliverables will be agreed upon with each partner. Apply for partnership via the website.",
     ],
   },
   {

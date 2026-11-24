@@ -8,7 +8,7 @@ const VIDEO_SRC = "/videos/The-arena.mp4";
 // Phones: how much bigger than the section the video is on each side, as a
 // fraction of the section. It's also how far the video can drift, so it
 // never runs out and shows a black edge.
-const PHONE_OVERSCAN = 0.2;
+const PHONE_OVERSCAN = 0.4;
 
 // Muted + playsInline are required for autoplay on mobile browsers.
 const videoProps = {
@@ -17,13 +17,47 @@ const videoProps = {
   muted: true,
   loop: true,
   playsInline: true,
-  preload: "metadata",
+  preload: "auto",
   "aria-hidden": true,
 } as const;
 
 export default function CallForEntriesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const layerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Phones often refuse to autoplay (React does not always write the `muted`
+  // attribute, and data-saver / low-power modes block it). Force the video
+  // muted and keep retrying to play it whenever it scrolls into view or the
+  // visitor first touches the page.
+  useEffect(() => {
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    if (!video || !section) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    const play = () => {
+      if (video.paused) video.play().catch(() => {});
+    };
+    play();
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) play();
+        else video.pause();
+      },
+      { threshold: 0.1 },
+    );
+    io.observe(section);
+    window.addEventListener("touchstart", play, { passive: true });
+    video.addEventListener("loadeddata", play);
+    return () => {
+      io.disconnect();
+      window.removeEventListener("touchstart", play);
+      video.removeEventListener("loadeddata", play);
+    };
+  }, []);
 
   // Phones (portrait): the section is a short 16:9 strip, so a video pinned
   // to the screen would only line up with it mid-screen and leave black
@@ -93,13 +127,14 @@ export default function CallForEntriesSection() {
       className="relative h-svh w-full overflow-hidden bg-black [clip-path:inset(0)] portrait:aspect-video portrait:h-auto"
     >
       {/* Landscape: a full-screen layer pinned to the screen. Portrait: a
-          layer 20% bigger than the strip on every side, moved by the
+          layer 40% taller than the strip above and below, moved by the
           effect above. */}
       <div
         ref={layerRef}
-        className="pointer-events-none fixed inset-0 will-change-transform portrait:absolute portrait:-inset-[20%]"
+        className="pointer-events-none fixed inset-0 will-change-transform portrait:absolute portrait:-inset-x-[10%] portrait:-inset-y-[40%]"
       >
         <video
+          ref={videoRef}
           {...videoProps}
           className="h-full w-full object-cover opacity-60"
         />

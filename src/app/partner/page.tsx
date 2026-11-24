@@ -7,7 +7,7 @@ import { PARTNERSHIPS_OPEN } from "@/lib/launch";
 export const metadata: Metadata = {
   title: "Become a Partner",
   description:
-    "Partner with CULBRA as a sponsor, technology, media or logistics partner and reach 100,000 participants.",
+    "Partner with CULBRA as a sponsor, technology, media or logistics partner and reach 300,000 participants.",
 };
 
 export default function PartnerPage() {
@@ -20,7 +20,7 @@ export default function PartnerPage() {
           eyebrow="Partnerships open soon"
           title="Partner"
           accent="With Culbra"
-          body="When the clock hits zero, technology, media, logistics companies and other companies can tell us how they’d like to work with CULBRA through sponsorship or partnership and reach 100,000 young Nigerians."
+          body="When the clock hits zero, technology, media, logistics companies and other companies can tell us how they’d like to work with CULBRA through sponsorship or partnership and reach 300,000 young Nigerians."
         />
       )}
       <Footer />

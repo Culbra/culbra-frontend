@@ -245,7 +245,7 @@ export default function PartnerForm() {
               will follow up.
             </p>
             <p className="mt-6 max-w-md text-sm leading-relaxed text-white/55">
-              Reach an audience of 100,000 participants and align your brand
+              Reach an audience of 300,000 participants and align your brand
               with culture, brains, integrity and responsible citizenship.
             </p>
           </div>

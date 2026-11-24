@@ -6,7 +6,7 @@ const STATS = [
   { target: 36, suffix: "", label: "States" },
   { target: 774, suffix: "", label: "Local Governments" },
   { target: 205, suffix: "+", label: "Ethnic/Cultural Groups" },
-  { target: 100000, suffix: "+", label: "Brains" },
+  { target: 300000, suffix: "", label: "Brains" },
 ];
 
 const COUNT_DURATION_MS = 2000;
