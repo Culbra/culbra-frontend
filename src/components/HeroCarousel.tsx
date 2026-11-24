@@ -412,7 +412,7 @@ export default function HeroCarousel() {
 
   return (
     <section className="relative flex h-dvh flex-col overflow-hidden bg-black md:h-auto md:min-h-screen">
-      <Navbar />
+      <Navbar onExplore={locked ? () => unlock() : undefined} />
 
       <HeroSlide
         key={slide.id}
