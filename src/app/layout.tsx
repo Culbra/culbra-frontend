@@ -88,7 +88,7 @@ const jsonLd = {
       sameAs: [
         "https://x.com/culbraafrica",
         "https://www.facebook.com/CulbraAfrica",
-        "https://www.instagram.com/culbrafrica",
+        "https://www.instagram.com/culbrafrica_",
         "https://www.youtube.com/@culbraafrica",
         "https://www.tiktok.com/@culbraafrica",
       ],

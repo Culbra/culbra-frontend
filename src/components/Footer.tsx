@@ -33,7 +33,7 @@ const COLUMNS: { title: string; links: { label: string; href?: string; contact?:
 const SOCIALS: { label: string; href: string; path: React.ReactNode }[] = [
   {
     label: "Instagram",
-    href: "https://www.instagram.com/culbrafrica",
+    href: "https://www.instagram.com/culbrafrica_",
     path: (
       <>
         <rect x="3" y="3" width="18" height="18" rx="5" />
