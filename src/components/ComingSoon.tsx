@@ -48,6 +48,7 @@ export default function ComingSoon({
   accent,
   body,
   countdown = true,
+  registerButton = false,
 }: {
   eyebrow: string;
   title: string;
@@ -55,6 +56,8 @@ export default function ComingSoon({
   body: string;
   // false: no clock or date, for when the opening date is not yet set.
   countdown?: boolean;
+  // Shows a Register button that stays disabled until the countdown ends.
+  registerButton?: boolean;
 }) {
   const target = new Date(LAUNCH_DATE).getTime();
   const parts = useCountdown(target);
@@ -103,7 +106,7 @@ export default function ComingSoon({
         </p>
 
         <h1
-          className="animate-fade-up mt-6 text-4xl font-extrabold leading-[1.05] uppercase sm:text-6xl lg:text-7xl"
+          className="animate-fade-up mt-6 text-2xl font-extrabold leading-[1.15] uppercase sm:text-4xl lg:text-5xl"
           style={{ animationDelay: "150ms" }}
         >
           {title}
@@ -156,14 +159,27 @@ export default function ComingSoon({
           </>
         )}
 
-        <Link
-          href="/"
-          className="animate-fade-up group mt-10 inline-flex items-center gap-3 rounded-full border border-culbra-green bg-culbra-green px-6 py-3 text-sm font-extrabold tracking-wide text-black uppercase shadow-[0_8px_28px_-6px_rgba(18,160,102,0.65)] transition-[scale,background-color] hover:scale-105 hover:bg-[#16b674] sm:text-base"
-          style={{ animationDelay: "750ms" }}
-        >
-          Explore Culbra
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </Link>
+        {registerButton ? (
+          <button
+            type="button"
+            disabled={!live}
+            title={live ? undefined : "Registration opens on 5 December 2026"}
+            onClick={() => (window.location.href = "/register")}
+            className="animate-fade-up mt-10 inline-flex items-center justify-center rounded-full border border-culbra-green bg-culbra-green px-10 py-3 text-sm font-extrabold tracking-wide text-black uppercase shadow-[0_8px_28px_-6px_rgba(18,160,102,0.65)] transition-[scale,background-color] enabled:hover:scale-105 enabled:hover:bg-[#16b674] disabled:cursor-not-allowed disabled:opacity-60 sm:text-base"
+            style={{ animationDelay: "750ms" }}
+          >
+            Register
+          </button>
+        ) : (
+          <Link
+            href="/"
+            className="animate-fade-up group mt-10 inline-flex items-center gap-3 rounded-full border border-culbra-green bg-culbra-green px-6 py-3 text-sm font-extrabold tracking-wide text-black uppercase shadow-[0_8px_28px_-6px_rgba(18,160,102,0.65)] transition-[scale,background-color] hover:scale-105 hover:bg-[#16b674] sm:text-base"
+            style={{ animationDelay: "750ms" }}
+          >
+            Explore Culbra
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        )}
       </div>
     </main>
   );

@@ -152,6 +152,8 @@ export default function PartnerForm() {
   const [values, setValues] = useState<Values>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [done, setDone] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
   const otherRef = useRef<HTMLInputElement>(null);
 
   // Choosing "Other" reveals a text box; move the cursor into it. This runs
@@ -174,8 +176,9 @@ export default function PartnerForm() {
         : PILLARS.filter((p) => p === pillar || values.pillars.includes(p)),
     );
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (sending) return;
     const found = validate(values);
     setErrors(found);
     const first = Object.keys(found)[0];
@@ -183,7 +186,32 @@ export default function PartnerForm() {
       document.getElementById(first)?.focus();
       return;
     }
-    // TODO: send `values` to the backend once a partnerships endpoint exists.
+    setSending(true);
+    setSendError("");
+    try {
+      const res = await fetch("/api/partner", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(
+          typeof body?.error === "string"
+            ? body.error
+            : "Something went wrong. Please try again.",
+        );
+      }
+    } catch (err) {
+      setSendError(
+        err instanceof Error && err.message !== "Failed to fetch"
+          ? err.message
+          : "We couldn’t reach the server. Check your connection and try again.",
+      );
+      setSending(false);
+      return;
+    }
+    setSending(false);
     setDone(true);
     // Keep the thank-you message in view (on phones the intro sits above it).
     document
@@ -424,11 +452,17 @@ export default function PartnerForm() {
                   </div>
                 </Field>
 
+                {sendError && (
+                  <p role="alert" className="text-sm text-[#ee2e29]">
+                    {sendError}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-[#fc8a0d] px-8 py-3.5 text-sm font-bold tracking-wide text-black uppercase shadow-lg shadow-[#fc8a0d]/25 transition-transform hover:scale-[1.02]"
+                  disabled={sending}
+                  className="w-full rounded-full bg-[#fc8a0d] px-8 py-3.5 text-sm font-bold tracking-wide text-black uppercase shadow-lg shadow-[#fc8a0d]/25 transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
                 >
-                  Send enquiry
+                  {sending ? "Sending…" : "Send enquiry"}
                 </button>
               </form>
             )}

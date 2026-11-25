@@ -9,7 +9,7 @@ const FAQS: { q: string; a: string[] }[] = [
   {
     q: "What is CULBRA?",
     a: [
-      "CULBRA, which stands for Culture and Brains, is an eight-week youth crevtivity base competition designed to promote cultural values, intellectual excellence, integrity, and practical problem-solving in Nigeria.",
+      "CULBRA, which stands for Culture and Brains, is an eight-week youth crevtivity based competition designed to promote cultural values, intellectual excellence, integrity, and practical problem-solving in Nigeria.",
       "The competition challenges participants to demonstrate not only what they know, but also how they apply their knowledge, skills, creativity, and values to real-world problems and stand a chance to win from a 10 million Naira prize pool.",
     ],
   },
@@ -128,8 +128,8 @@ function FaqItem({
           {q}
           <span
             className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${open
-                ? "rotate-45 border-[#fc8a0d] bg-[#fc8a0d] text-black"
-                : "border-black/20 dark:border-white/20"
+              ? "rotate-45 border-[#fc8a0d] bg-[#fc8a0d] text-black"
+              : "border-black/20 dark:border-white/20"
               }`}
             aria-hidden="true"
           >
