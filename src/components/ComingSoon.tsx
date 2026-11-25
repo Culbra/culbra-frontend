@@ -159,17 +159,15 @@ export default function ComingSoon({
           </>
         )}
 
-        {registerButton ? (
-          <button
-            type="button"
-            disabled={!live}
-            title={live ? undefined : "Registration opens on 5 December 2026"}
-            onClick={() => (window.location.href = "/register")}
-            className="animate-fade-up mt-10 inline-flex items-center justify-center rounded-full border border-culbra-green bg-culbra-green px-10 py-3 text-sm font-extrabold tracking-wide text-black uppercase shadow-[0_8px_28px_-6px_rgba(18,160,102,0.65)] transition-[scale,background-color] enabled:hover:scale-105 enabled:hover:bg-[#16b674] disabled:cursor-not-allowed disabled:opacity-60 sm:text-base"
+        {/* Explore Culbra until the countdown ends, then Register. */}
+        {registerButton && live ? (
+          <Link
+            href="/register"
+            className="animate-fade-up mt-10 inline-flex items-center justify-center rounded-full border border-culbra-green bg-culbra-green px-10 py-3 text-sm font-extrabold tracking-wide text-black uppercase shadow-[0_8px_28px_-6px_rgba(18,160,102,0.65)] transition-[scale,background-color] hover:scale-105 hover:bg-[#16b674] sm:text-base"
             style={{ animationDelay: "750ms" }}
           >
             Register
-          </button>
+          </Link>
         ) : (
           <Link
             href="/"
