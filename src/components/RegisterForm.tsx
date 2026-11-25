@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import Link from "next/link";
+import DatePicker from "./DatePicker";
 import Select from "./Select";
 import { ArrowLeft, Check, ImagePlus } from "lucide-react";
 import { COUNTRIES } from "@/data/countries";
@@ -452,17 +453,13 @@ export default function RegisterForm() {
                 </Field>
 
                 <Field label="Date of Birth" htmlFor="dateOfBirth">
-                  <input
+                  <DatePicker
                     id="dateOfBirth"
-                    name="dateOfBirth"
-                    type="date"
-                    autoComplete="bday"
+                    className={inputClass}
+                    openClassName="ring-[#fc8a0d]/60"
                     max={new Date().toISOString().slice(0, 10)}
                     value={values.dateOfBirth}
-                    onChange={(e) => set("dateOfBirth", e.target.value)}
-                    className={`${inputClass} ${
-                      values.dateOfBirth ? "" : "text-black/35 dark:text-white/35"
-                    }`}
+                    onChange={(v) => set("dateOfBirth", v)}
                   />
                 </Field>
 

@@ -258,18 +258,16 @@ export default function HeroCarousel() {
     [goTo],
   );
 
-  const unlock = useCallback((targetId: string = "after-hero") => {
+  const unlock = useCallback((targetId: string = "hero-features") => {
     setLocked(false);
     const target = document.getElementById(targetId);
     if (target) {
-      // Line the section's bottom edge up with the bottom of the screen, so
-      // the whole strip is in view (it's short — aligning its top would
-      // mostly show the section below it).
+      // Line the top of the pillars bar up just under the fixed navbar, so
+      // the pillars, the stats strip and the start of "More than a
+      // competition" are all in view.
+      const navHeight = document.querySelector("header")?.offsetHeight ?? 0;
       const rect = target.getBoundingClientRect();
-      const targetY = Math.max(
-        0,
-        rect.bottom + window.scrollY - window.innerHeight,
-      );
+      const targetY = Math.max(0, rect.top + window.scrollY - navHeight);
       smoothScrollTo(targetY, UNLOCK_SCROLL_DURATION_MS);
     }
   }, []);

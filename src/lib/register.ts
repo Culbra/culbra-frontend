@@ -64,7 +64,7 @@ export function buildRegistrationFormData(
 // secrets: never put keys or tokens in a NEXT_PUBLIC_ variable.
 const API_URL = (
   process.env.NEXT_PUBLIC_API_URL ??
-  "https://culbra-backend-production.up.railway.app"
+  "https://culbra-backend-1.onrender.com"
 ).replace(/\/+$/, "");
 const REGISTER_PATH =
   process.env.NEXT_PUBLIC_REGISTER_PATH ?? "/api/register";

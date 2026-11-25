@@ -17,10 +17,10 @@ export default function RegisterPage() {
       ) : (
         <ComingSoon
           eyebrow="Registration opens soon"
-          title="Registration"
-          accent="To Be Announced"
-          body="We’re putting the final touches on registration. The opening date will be announced soon. Follow CULBRA on our socials so you’re first to know when you can sign up to compete across Culture, Brains, Creativity and Impact."
-          countdown={false}
+          title="Registration opens on"
+          accent="the 5th of December, 2026"
+          body="Be amongst the first to get into the Arena"
+          registerButton
         />
       )}
       <Footer />

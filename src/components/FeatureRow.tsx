@@ -16,6 +16,7 @@ export default function FeatureRow({
 }) {
   return (
     <div
+      id="hero-features"
       className="relative flex-none bg-cover bg-center"
       style={{ backgroundImage: "url(/images/tribal-pattern.jpg)" }}
     >

@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import ScrollLink from "./ScrollLink";
+import ContactButton from "./ContactButton";
 
 const REGISTER_HREF = process.env.NEXT_PUBLIC_REGISTER_HREF ?? "/register";
 
 // Links start with "/" so they also work from pages other than the home page.
 // An item without an href is shown as plain text.
-const COLUMNS: { title: string; links: { label: string; href?: string }[] }[] =
+const COLUMNS: { title: string; links: { label: string; href?: string; contact?: boolean }[] }[] =
   [
     {
       title: "About",
@@ -21,7 +22,7 @@ const COLUMNS: { title: string; links: { label: string; href?: string }[] }[] =
       title: "Get Involved",
       links: [
         { label: "Register", href: REGISTER_HREF },
-        { label: "Call for Entries", href: "/#call-for-entries" },
+        { label: "Contact us", contact: true },
         { label: "Partner with Us", href: "/partner#partner-form" },
         { label: "FAQ", href: "/#faq" },
       ],
@@ -99,7 +100,7 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-6 text-sm leading-relaxed text-white/75">
-              An eight-week youth impact competition where culture, brains,
+              An eight-week youth creativity competition where culture, brains,
               and creativity get seen, tested, celebrated, and converted into
               impact.
             </p>
@@ -140,9 +141,13 @@ export default function Footer() {
               <div key={title}>
                 <h2 className="text-xs font-medium text-white/60">{title}</h2>
                 <ul className="mt-5 space-y-4">
-                  {links.map(({ label, href }) => (
+                  {links.map(({ label, href, contact }) => (
                     <li key={label}>
-                      {href ? (
+                      {contact ? (
+                        <ContactButton className="text-sm font-medium transition-colors hover:text-culbra-green">
+                          {label}
+                        </ContactButton>
+                      ) : href ? (
                         <ScrollLink
                           href={href}
                           className="text-sm font-medium transition-colors hover:text-culbra-green"
@@ -162,7 +167,7 @@ export default function Footer() {
 
         <div className="mt-16 flex flex-col gap-4 text-xs text-white/75 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            Copyright © {new Date().getFullYear()} CULBRA. A project by Moov.
+            Copyright © {new Date().getFullYear()} CULBRA.
             All rights reserved.
           </p>
           <ul className="flex gap-8">
